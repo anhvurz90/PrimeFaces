@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,5 +40,8 @@ public class CheckListController implements Serializable {
     public void save() {
         checkService.save(check);
         check = new Check();
+        
+        FacesContext.getCurrentInstance().addMessage(
+                null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Check saved!", null));
     }
 }

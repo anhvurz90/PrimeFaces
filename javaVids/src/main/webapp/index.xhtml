@@ -5,6 +5,11 @@
     <h:head>
     </h:head>
     <h:body>
+    
+        <p:messages id="messages"/>
+        
+        <p:growl id="growlMessage"/>
+    
         <p:dataTable value="#{checkListController.loadChecks()}" 
                      var="check"
                      id="checkTable">
@@ -25,7 +30,7 @@
             </p:panelGrid>
             <p:commandButton value="save" 
                              action="#{checkListController.save()}"
-                             update="checkForm, :checkTable"/>
+                             update="checkForm, :checkTable, :messages, :growlMessage"/>
         </h:form>
     </h:body>
 </html>
