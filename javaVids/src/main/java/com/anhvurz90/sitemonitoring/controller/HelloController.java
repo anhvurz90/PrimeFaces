@@ -11,24 +11,24 @@ import org.springframework.stereotype.Component;
 
 import com.anhvurz90.sitemonitoring.service.HelloSpringService;
 
-//@ManagedBean
-@Scope("request")
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+@ManagedBean
+//@Scope("request")
 //@Component
-@Named
+//@Named
 public class HelloController {
 
-//    @ManagedProperty("#{helloSpringService}")
 //    @Autowired
-    @Inject
+//    @Inject
+    @ManagedProperty("#{helloSpringService}")
     private HelloSpringService helloSpringService;
     
     public String showHello() {
         return helloSpringService.sayHello();
     }
-
-    public void setHelloSpringService(HelloSpringService helloSpringService) {
-        this.helloSpringService = helloSpringService;
-    }
-    
 
 }
