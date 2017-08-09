@@ -21,7 +21,13 @@ public class CheckListController {
     @Autowired
     private CheckService checkService;
     
+    private Check check = new Check();
+    
     public List<Check> loadChecks() {
         return checkService.findAll();
+    }
+    
+    public void save() {
+        checkService.save(check);
     }
 }
