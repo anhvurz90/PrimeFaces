@@ -5,7 +5,15 @@
     <h:head>
     </h:head>
     <h:body>
-        Managed Bean says:
-        #{helloController.showHello()}
+        <p:dataTable value="#{checkListController.loadChecks()}" var="check">
+            <p:column headerText="name">
+                #{check.name}
+            </p:column>
+            <p:column headerText="url">
+                <a href="#{check.url}" target="_blank">
+                    #{check.url}
+                </a>
+            </p:column>
+        </p:dataTable>
     </h:body>
 </html>
