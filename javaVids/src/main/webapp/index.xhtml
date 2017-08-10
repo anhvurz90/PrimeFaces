@@ -28,7 +28,9 @@
                                      update=":checkForm"/>
                      <p:commandButton value="remove"
                                       action="#{checkListController.remove(check)}"
-                                      update=":checkTable, :messages, :growlMessage"/>
+                                      update=":checkTable, :messages, :growlMessage">
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+                     </p:commandButton>
                 </h:form>
             </p:column>
         </p:dataTable>
@@ -42,6 +44,13 @@
             <p:commandButton value="save" 
                              action="#{checkListController.save()}"
                              update="checkForm, :checkTable, :messages, :growlMessage"/>
+        </h:form>
+        
+        <h:form>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
         </h:form>
     </h:body>
 </html>
