@@ -3,6 +3,14 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+        <script type="text/javascript">
+            function handleDialogSubmit(args, dialogName) {
+                if (!args.validationFailed) {
+                    PF(dialogName).hide();
+                }
+            }
+        </script>
+    
     </h:head>
     <h:body>
     
@@ -25,7 +33,9 @@
                 <h:form>
                     <p:commandButton value="edit" 
                                      action="#{checkListController.setCheck(check)}"
-                                     update=":checkForm"/>
+                                     update=":checkForm"
+                                     oncomplete="PF('checkDialog').show()"
+                                     resetValues="true"/>
                      <p:commandButton value="remove"
                                       action="#{checkListController.remove(check)}"
                                       update=":checkTable, :messages, :growlMessage">
@@ -34,17 +44,31 @@
                 </h:form>
             </p:column>
         </p:dataTable>
+
+        <br/>
         
-        <h:form id="checkForm">
-            <p:focus/>
-            <p:panelGrid columns="2">
-                name:<p:inputText value="#{checkListController.check.name}"/>
-                url: <p:inputText value="#{checkListController.check.url}"/>
-            </p:panelGrid>
-            <p:commandButton value="save" 
-                             action="#{checkListController.save()}"
-                             update="checkForm, :checkTable, :messages, :growlMessage"/>
+        <h:form>
+            <p:commandButton value="add check" 
+                             oncomplete="PF('checkDialog').show()"
+                             action="#{checkListController.clear()}"
+                             update=":checkForm"
+                             resetValues="true"/>
         </h:form>
+
+        <p:dialog widgetVar="checkDialog" closeOnEscape="true" modal="true" header="check">
+            <h:form id="checkForm">
+                <p:messages/>
+                <p:focus/>
+                <p:panelGrid columns="2">
+                    name:<p:inputText value="#{checkListController.check.name}"/>
+                    url: <p:inputText value="#{checkListController.check.url}"/>
+                </p:panelGrid>
+                <p:commandButton value="save" 
+                                 action="#{checkListController.save()}"
+                                 update="checkForm, :checkTable"
+                                 oncomplete="handleDialogSubmit(args, 'checkDialog')"/>
+            </h:form>
+        </p:dialog>
         
         <h:form>
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closeOnEscape="true">
@@ -52,5 +76,6 @@
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
             </p:confirmDialog>
         </h:form>
+        
     </h:body>
 </html>
