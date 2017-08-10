@@ -21,4 +21,8 @@ public class CheckService {
     public void save(Check check) {
         checkRepository.save(check);
     }
+
+    public void remove(Check check) {
+        checkRepository.delete(check);
+    }
 }
