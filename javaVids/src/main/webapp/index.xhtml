@@ -1,5 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
@@ -13,6 +14,17 @@
     
     </h:head>
     <h:body>
+    
+        Click button to go to second page
+        <h:form>
+            <p:link outcome="secondPage" value="Open Second Page">
+                <f:param name="productId" value="10" />
+            </p:link>
+        
+            <!--h:commandButton value="Open Second Page"
+                             action="secondPage"/-->
+        </h:form>
+    
     
         <p:messages id="messages"/>
         
